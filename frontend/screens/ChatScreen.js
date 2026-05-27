@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import * as Speech from 'expo-speech';
 import * as FileSystem from 'expo-file-system/legacy';
 
-const BASE_URL = 'http://192.168.137.1:5000';
+const BASE_URL = 'https://doctor-ai-04d3.onrender.com';
 
 const customFetch = async (url, options = {}) => {
   const token = await AsyncStorage.getItem('userToken');

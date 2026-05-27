@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // const API_URL = 'http://10.101.48.184:5000';
 
 // FOR MOBILE HOTSPOT (Windows Hotspot IP):
-const API_URL = 'http://192.168.137.1:5000';
+const API_URL = 'https://doctor-ai-04d3.onrender.com';
 
 const instance = axios.create({
   baseURL: API_URL,
