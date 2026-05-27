@@ -4,6 +4,8 @@ import { View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
 import './src/i18n';
 import i18n from './src/i18n';
@@ -31,6 +33,9 @@ export default function App() {
   useEffect(() => {
     const checkLoginState = async () => {
       try {
+        // Pre-load vector icons font to fix invisible icons in APK
+        await Font.loadAsync(Ionicons.font);
+
         // Load saved language
         const savedLang = await AsyncStorage.getItem('lang');
         if (savedLang) {
@@ -49,7 +54,7 @@ export default function App() {
           }
         }
       } catch (error) {
-        console.error('Error checking login state', error);
+        console.error('Error initializing app:', error);
       } finally {
         setIsLoading(false);
       }

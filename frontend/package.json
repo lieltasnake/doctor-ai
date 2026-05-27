@@ -17,6 +17,7 @@
     "expo-asset": "~55.0.17",
     "expo-audio": "~1.1.1",
     "expo-file-system": "~19.0.22",
+    "expo-font": "^56.0.5",
     "expo-image-picker": "~17.0.11",
     "expo-linear-gradient": "~15.0.8",
     "expo-localization": "~17.0.8",
