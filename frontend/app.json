@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Doctor AI",
+    "slug": "doctor-ai",
+    "version": "1.0.0",
+    "android": {
+      "permissions": [
+        "RECORD_AUDIO",
+        "INTERNET",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "ios": {
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Allow Doctor AI to use the microphone to listen to your symptoms."
+      }
+    },
+    "plugins": [
+      "expo-audio"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d4768f4d-0645-4d93-be10-6d9188ee4387"
+      }
+    },
+    "owner": "mahlet-alemu"
+  }
+}
