@@ -2,3 +2,6 @@ groq
 python-dotenv
 sqlalchemy
 psycopg2-binary
+Flask
+Flask-CORS
+gunicorn
