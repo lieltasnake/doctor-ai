@@ -8,7 +8,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/axios';
 import ProfileAvatar from '../components/ProfileAvatar';
-import { Ionicons } from '@expo/vector-icons';
+
 import { useAudioRecorder, requestRecordingPermissionsAsync, RecordingPresets, setAudioModeAsync } from 'expo-audio';
 import { useTranslation } from 'react-i18next';
 import * as Speech from 'expo-speech';
@@ -87,7 +87,7 @@ function RecordingOverlay({ isRecording, onStop }) {
     <TouchableOpacity style={styles.recordingOverlay} activeOpacity={0.9} onPress={onStop}>
       <Animated.View style={[styles.pulseCircle, { transform: [{ scale: pulseAnim }] }]} />
       <View style={styles.micCircle}>
-        <Ionicons name="mic" size={40} color="#fff" />
+        <Text style={{fontSize:36, color:'#fff'}}>🎤</Text>
       </View>
       <Text style={styles.recordingText}>Listening...</Text>
       <Text style={styles.recordingSubtext}>Tap anywhere to stop</Text>
@@ -148,7 +148,7 @@ function AiMessage({ item }) {
             <View style={styles.diagnosisDivider} />
             {item.condition && (
               <View style={styles.conditionRow}>
-                <Ionicons name="medical" size={14} color="#1a5276" />
+                <Text style={{fontSize:14}}>🩺</Text>
                 <Text style={styles.conditionText}> {item.condition}</Text>
               </View>
             )}
@@ -486,7 +486,7 @@ export default function ChatScreen({ route, navigation }) {
       {/* Header */}
       <View style={[styles.header, { backgroundColor: headerColor }]}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Text style={{fontSize:24, color:'#fff', fontWeight:'bold'}}>←</Text>
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerTitle}>{t(categoryKey)}</Text>
@@ -541,11 +541,7 @@ export default function ChatScreen({ route, navigation }) {
             style={[styles.voiceBtn, isRecording && styles.recordingBtn]}
             onPress={toggleVoice}
           >
-            <Ionicons
-              name={isRecording ? 'mic' : 'mic-outline'}
-              size={22}
-              color={isRecording ? '#fff' : '#555'}
-            />
+            <Text style={{fontSize:22}}>{isRecording ? '🎤' : '🎙️'}</Text>
           </TouchableOpacity>
           <TextInput
             style={styles.input}
@@ -562,7 +558,7 @@ export default function ChatScreen({ route, navigation }) {
             onPress={sendMessage}
             disabled={!input.trim() || isLoading}
           >
-            <Ionicons name="send" size={20} color="#fff" />
+            <Text style={{fontSize:18, color:'#fff'}}>➤</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -576,9 +572,9 @@ export default function ChatScreen({ route, navigation }) {
               <Text style={styles.menuHeaderName}>{userName || 'Patient'}</Text>
             </View>
             {[
-              { label: 'My Profile',    icon: 'person-outline',    screen: 'ProfileScreen'       },
-              { label: 'Manage Account',icon: 'settings-outline',  screen: 'ManageAccountScreen' },
-              { label: 'History',       icon: 'time-outline',      screen: 'HistoryScreen'       },
+              { label: 'My Profile',    emoji: '👤', screen: 'ProfileScreen'       },
+              { label: 'Manage Account',emoji: '⚙️', screen: 'ManageAccountScreen' },
+              { label: 'History',       emoji: '🕐', screen: 'HistoryScreen'       },
             ].map(item => (
               <TouchableOpacity
                 key={item.screen}
@@ -592,16 +588,16 @@ export default function ChatScreen({ route, navigation }) {
                   }
                 }}
               >
-                <Ionicons name={item.icon} size={18} color="#1a5276" />
+                <Text style={{fontSize:18}}>{item.emoji}</Text>
                 <Text style={styles.menuText}>{item.label}</Text>
               </TouchableOpacity>
             ))}
             <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuVisible(false); setLangModal(true); }}>
-              <Ionicons name="language-outline" size={18} color="#1a5276" />
+              <Text style={{fontSize:18}}>🌐</Text>
               <Text style={styles.menuText}>Language</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.menuItem, styles.menuItemDanger]} onPress={handleLogout}>
-              <Ionicons name="log-out-outline" size={18} color="#e74c3c" />
+              <Text style={{fontSize:18}}>🚪</Text>
               <Text style={[styles.menuText, { color: '#e74c3c' }]}>Logout</Text>
             </TouchableOpacity>
           </View>
@@ -627,7 +623,7 @@ export default function ChatScreen({ route, navigation }) {
                 <Text style={[styles.langOptionText, i18n.language === lang.code && { color: '#2980b9', fontWeight: 'bold' }]}>
                   {lang.label}
                 </Text>
-                {i18n.language === lang.code && <Ionicons name="checkmark-circle" size={20} color="#2980b9" />}
+                {i18n.language === lang.code && <Text style={{fontSize:20}}>✅</Text>}
               </TouchableOpacity>
             ))}
           </View>

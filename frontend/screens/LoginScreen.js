@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, Modal } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+
 import api from '../api/axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
@@ -52,13 +52,13 @@ export default function LoginScreen({ navigation }) {
         style={styles.langSelectorBtn} 
         onPress={() => setLangModalVisible(true)}
       >
-        <Ionicons name="globe-outline" size={26} color="#007AFF" />
+        <Text style={{fontSize:24}}>🌐</Text>
       </TouchableOpacity>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View style={styles.iconWrapper}>
-            <Ionicons name="medical" size={50} color="#2980b9" />
+            <Text style={{fontSize:50}}>🩺</Text>
           </View>
           <Text style={styles.title}>Doctor AI</Text>
           <Text style={styles.subtitle}>{t('welcomeBack')}</Text>
@@ -67,13 +67,13 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.formContainer}>
           {errorMsg ? (
             <View style={styles.errorBox}>
-              <Ionicons name="alert-circle" size={20} color="#e74c3c" />
+              <Text style={{fontSize:20}}>⚠️</Text>
               <Text style={styles.errorText}>{errorMsg}</Text>
             </View>
           ) : null}
 
           <View style={styles.inputContainer}>
-            <Ionicons name="mail-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>📧</Text>
             <TextInput
               style={styles.input}
               placeholder={t('emailAddress')}
@@ -86,7 +86,7 @@ export default function LoginScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>🔒</Text>
             <TextInput
               style={styles.input}
               placeholder={t('password')}
@@ -96,7 +96,7 @@ export default function LoginScreen({ navigation }) {
               secureTextEntry={!showPassword}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-              <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={22} color="#7f8c8d" />
+              <Text style={{fontSize:20}}>{showPassword ? '🙈' : '👁'}</Text>
             </TouchableOpacity>
           </View>
 
@@ -145,7 +145,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => changeLanguage('en')}
             >
               <Text style={[styles.langOptionText, i18n.language === 'en' && styles.langOptionTextSelected]}>🇺🇸 English</Text>
-              {i18n.language === 'en' && <Ionicons name="checkmark-circle" size={20} color="#2980b9" />}
+              {i18n.language === 'en' && <Text style={{fontSize:18}}>✅</Text>}
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -153,7 +153,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => changeLanguage('am')}
             >
               <Text style={[styles.langOptionText, i18n.language === 'am' && styles.langOptionTextSelected]}>🇪🇹 አማርኛ</Text>
-              {i18n.language === 'am' && <Ionicons name="checkmark-circle" size={20} color="#2980b9" />}
+              {i18n.language === 'am' && <Text style={{fontSize:18}}>✅</Text>}
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -161,7 +161,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => changeLanguage('om')}
             >
               <Text style={[styles.langOptionText, i18n.language === 'om' && styles.langOptionTextSelected]}>🇪🇹 Afaan Oromo</Text>
-              {i18n.language === 'om' && <Ionicons name="checkmark-circle" size={20} color="#2980b9" />}
+              {i18n.language === 'om' && <Text style={{fontSize:18}}>✅</Text>}
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -169,7 +169,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => changeLanguage('ti')}
             >
               <Text style={[styles.langOptionText, i18n.language === 'ti' && styles.langOptionTextSelected]}>🇪🇹 ትግርኛ</Text>
-              {i18n.language === 'ti' && <Ionicons name="checkmark-circle" size={20} color="#2980b9" />}
+              {i18n.language === 'ti' && <Text style={{fontSize:18}}>✅</Text>}
             </TouchableOpacity>
           </View>
         </TouchableOpacity>

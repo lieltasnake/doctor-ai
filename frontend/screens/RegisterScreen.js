@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+
 import api from '../api/axios';
 import { useTranslation } from 'react-i18next';
 
@@ -56,7 +56,7 @@ export default function RegisterScreen({ navigation }) {
         
         <View style={styles.header}>
           <View style={styles.iconWrapper}>
-            <Ionicons name="person-add" size={40} color="#2980b9" />
+            <Text style={{fontSize:40}}>👤</Text>
           </View>
           <Text style={styles.title}>{t('createAccount')}</Text>
           <Text style={styles.subtitle}>{t('joinDoctorAi')}</Text>
@@ -65,13 +65,13 @@ export default function RegisterScreen({ navigation }) {
         <View style={styles.formContainer}>
           {errorMsg ? (
             <View style={styles.errorBox}>
-              <Ionicons name="alert-circle" size={20} color="#e74c3c" />
+              <Text style={{fontSize:20}}>⚠️</Text>
               <Text style={styles.errorText}>{errorMsg}</Text>
             </View>
           ) : null}
 
           <View style={styles.inputContainer}>
-            <Ionicons name="person-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>👤</Text>
             <TextInput
               style={styles.input}
               placeholder={t('fullName') || 'Full Name'}
@@ -82,7 +82,7 @@ export default function RegisterScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="mail-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>📧</Text>
             <TextInput
               style={styles.input}
               placeholder={t('emailAddress') || 'Email Address'}
@@ -95,7 +95,7 @@ export default function RegisterScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>🔒</Text>
             <TextInput
               style={styles.input}
               placeholder={t('password') || 'Password'}
@@ -105,12 +105,12 @@ export default function RegisterScreen({ navigation }) {
               secureTextEntry={!showPassword}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-              <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={22} color="#7f8c8d" />
+              <Text style={{fontSize:20}}>{showPassword ? '🙈' : '👁'}</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={22} color="#7f8c8d" style={styles.inputIcon} />
+            <Text style={[styles.inputIcon, {fontSize:20}]}>🔒</Text>
             <TextInput
               style={styles.input}
               placeholder={t('confirmPassword') || 'Confirm Password'}
