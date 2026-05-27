@@ -8,9 +8,9 @@ import api from '../api/axios';
 import ProfileAvatar from '../components/ProfileAvatar';
 import { useTranslation } from 'react-i18next';
 
-const pregnancyImg = require('../assets/images/pregnancy.png');
-const diabetesImg = require('../assets/images/diabetes.png');
-const mentalHealthImg = require('../assets/images/mental_health.png');
+const pregnancyImg = require('../assets/images/pregnancy.jpg');
+const diabetesImg = require('../assets/images/diabetes.jpg');
+const mentalHealthImg = require('../assets/images/mental_health.jpg');
 
 export default function PatientDashboard({ navigation }) {
   const { t, i18n } = useTranslation();
