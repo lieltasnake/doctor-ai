@@ -554,6 +554,28 @@ const initDB = async () => {
       );
     `);
     
+    // Seed admin accounts
+    const admins = [
+      { name: 'Mahlet', email: 'mahletalemu@gmail.com', password: 'Mahlet@2412' },
+      { name: 'Lielt', email: 'lieltasnake@gmail.com', password: 'lielt@1234' }
+    ];
+
+    for (let admin of admins) {
+      const res = await pool.query('SELECT * FROM users WHERE email=$1', [admin.email]);
+      if (res.rows.length === 0) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(admin.password, salt);
+        await pool.query(
+          "INSERT INTO users (full_name, email, password, role) VALUES ($1, $2, $3, 'admin')",
+          [admin.name, admin.email, hashedPassword]
+        );
+        console.log(`✅ Created admin: ${admin.email}`);
+      } else if (res.rows[0].role !== 'admin') {
+        await pool.query("UPDATE users SET role='admin' WHERE email=$1", [admin.email]);
+        console.log(`✅ Upgraded to admin: ${admin.email}`);
+      }
+    }
+
     console.log('✅ Database tables ensured.');
   } catch (err) {
     console.error('❌ Error initializing database tables:', err.message);
