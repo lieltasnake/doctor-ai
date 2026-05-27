@@ -509,6 +509,59 @@ app.get('/me', authMiddleware, async (req, res) => {
   } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on 0.0.0.0:${PORT}`));
+const initDB = async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        full_name VARCHAR(255),
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'patient',
+        profile_image TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS chat_sessions (
+        id UUID PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        category VARCHAR(50),
+        title VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS chat_messages (
+        id UUID PRIMARY KEY,
+        session_id UUID REFERENCES chat_sessions(id) ON DELETE CASCADE,
+        role VARCHAR(50) CHECK (role IN ('user', 'assistant')),
+        message TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS chat_history (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        disease_category VARCHAR(100) DEFAULT 'General',
+        message TEXT,
+        response TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    
+    console.log('✅ Database tables ensured.');
+  } catch (err) {
+    console.error('❌ Error initializing database tables:', err.message);
+  }
+};
+
+initDB().then(() => {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on 0.0.0.0:${PORT}`));
+});
 
